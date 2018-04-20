@@ -19,18 +19,18 @@ namespace ReadDataFromExcel.Controllers
 
             List<UserModel> usersToBeAddedList = new List<UserModel>();
             // Check dates
-            for (int i = STARTING_ROW; i < 10; i++)
+           while(true)
            {
                 
                 // Set current cell
-                Cell username = worksheet.Cell(i, 0);
-                Cell password = worksheet.Cell(i, 1);
-                Cell nimi = worksheet.Cell(i, 2);
-                Cell sukunimi = worksheet.Cell(i, 3);
-                Cell osoite = worksheet.Cell(i, 4);
-                Cell email = worksheet.Cell(i, 5);
-                Cell employeetype = worksheet.Cell(i, 6);
-                Cell enabled = worksheet.Cell(i, 7);
+                Cell username = worksheet.Cell(STARTING_ROW, 0);
+                Cell password = worksheet.Cell(STARTING_ROW, 1);
+                Cell nimi = worksheet.Cell(STARTING_ROW, 2);
+                Cell sukunimi = worksheet.Cell(STARTING_ROW, 3);
+                Cell osoite = worksheet.Cell(STARTING_ROW, 4);
+                Cell email = worksheet.Cell(STARTING_ROW, 5);
+                Cell employeetype = worksheet.Cell(STARTING_ROW, 6);
+                Cell enabled = worksheet.Cell(STARTING_ROW, 7);
                 if (username.ValueAsString.Equals(""))
                     break;
                 UserModel userModel = new UserModel
@@ -48,12 +48,12 @@ namespace ReadDataFromExcel.Controllers
 
                 usersToBeAddedList.Add(userModel);
                 // Write Date
-
+                STARTING_ROW += 1;
             }
 
             // Close document
             document.Close();
-            return View();
+            return View(usersToBeAddedList);
         }
 
         public IActionResult About()
